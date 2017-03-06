@@ -61,7 +61,6 @@ public class Processor {
     }
 
     public void updateMovieDynamically(Movie movie) {
-
         movieJDBCTemplate.updateMovieDynamically(movie);
     }
 

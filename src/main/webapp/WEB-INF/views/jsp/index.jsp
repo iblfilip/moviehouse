@@ -103,7 +103,6 @@ Copyright 2016 Google Inc. All Rights Reserved.
  <table class="table table-hover table-striped">
  <thead>
      <tr>
-     <th>id</th>
      <th>Title</th>
      <th>Genre</th>
      <th>Seen</th>
@@ -119,7 +118,6 @@ Copyright 2016 Google Inc. All Rights Reserved.
  <tbody>
      <c:forEach items="${movieList}" var="movie" varStatus="status">
         <tr>
-        <td>${movie.movieId}</td>
          <td>
          <form action="${pageContext.request.contextPath}/edit" method="post">
             <button type="submit" name="detail" value="${status.index}" class="btn-link">${movie.title}</button></td>

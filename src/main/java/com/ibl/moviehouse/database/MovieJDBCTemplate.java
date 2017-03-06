@@ -25,10 +25,35 @@ public class MovieJDBCTemplate implements MovieDAO {
     }
 
     public void insertMovie(Movie movie){
-        String sql = "INSERT INTO " + TableNameEnum.movies.name() + " (" + MovieColumnEnum.user_id.name()+ "," + MovieColumnEnum.title.name() +","+ MovieColumnEnum.genre.name() +","+ MovieColumnEnum.seen_date.name() +","+ MovieColumnEnum.seen.name() +","+ MovieColumnEnum.rat_total.name() +","+ MovieColumnEnum.rat_director.name() +","+ MovieColumnEnum.rat_actors.name() +","+ MovieColumnEnum.rat_story.name() +","+ MovieColumnEnum.rat_visual.name() + ") VALUES (?,?,?,?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, movie.getUserId(), movie.getTitle(), movie.getGenre(), movie.getSeenDate(), movie.isSeen(), movie.getRatTotal(), movie.getRatDirector(), movie.getRatActors(), movie.getRatStory(), movie.getRatVisual());
         logger.log(Level.INFO, "Inserted movie "+ movie.getTitle());
-        return;
+
+        StringBuilder insertQuery = new StringBuilder();
+        insertQuery.append("INSERT INTO " + TableNameEnum.movies + " (");
+        insertQuery.append(MovieColumnEnum.user_id);
+        insertQuery.append(", "+MovieColumnEnum.title);
+        insertQuery.append(", " + MovieColumnEnum.genre);
+        insertQuery.append(", "+ MovieColumnEnum.seen);
+        insertQuery.append(", " + MovieColumnEnum.seen_date);
+        insertQuery.append(", " + MovieColumnEnum.rat_total);
+        insertQuery.append(", " + MovieColumnEnum.rat_director);
+        insertQuery.append(", "+ MovieColumnEnum.rat_actors);
+        insertQuery.append(", " + MovieColumnEnum.rat_visual);
+        insertQuery.append(", " + MovieColumnEnum.rat_story + ")");
+        insertQuery.append(" VALUES (?,?,?,?,?,?,?,?,?,?)");
+
+        ArrayList<Object> params = new ArrayList<Object>();
+        params.add(movie.getUserId());
+        params.add(movie.getTitle());
+        params.add(movie.getGenre());
+        params.add(movie.isSeen());
+        if(!movie.getSeenDate().equals("")) params.add(movie.getSeenDate());
+        else if(movie.getSeenDate().equals("")) params.add(null);
+        params.add(movie.getRatTotal());
+        params.add(movie.getRatDirector());
+        params.add(movie.getRatActors());
+        params.add(movie.getRatVisual());
+        params.add(movie.getRatStory());
+        int row = jdbcTemplate.update(insertQuery.toString(), params.toArray());
     }
     public Movie selectMovie(Integer movieId){
         String sql = "SELECT * FROM " + TableNameEnum.movies.name() + " WHERE " + MovieColumnEnum.movie_id + "=?";
@@ -89,16 +114,16 @@ public class MovieJDBCTemplate implements MovieDAO {
     public void updateMovieDynamically(Movie movie) {
         StringBuilder updateQuery = new StringBuilder();
         updateQuery.append("UPDATE " + TableNameEnum.movies + " SET ");
-        updateQuery.append("user_id = ?");
-        if(movie.getTitle()!=null) updateQuery.append(", title = ?");
-        if(movie.getGenre()!=null) updateQuery.append(", genre = ?");
-        updateQuery.append(", seen = ?");
-        if(movie.getSeenDate() !=null) updateQuery.append(", seen_date = ?");
-        updateQuery.append(", rat_total = ?");
-        updateQuery.append(", rat_director = ?");
-        updateQuery.append(", rat_actors = ?");
-        updateQuery.append(", rat_visual = ?");
-        updateQuery.append(", rat_story = ?");
+        updateQuery.append(MovieColumnEnum.user_id + " = ?");
+        if(movie.getTitle()!=null) updateQuery.append(", " + MovieColumnEnum.title + " = ?");
+        if(movie.getGenre()!=null) updateQuery.append(", " + MovieColumnEnum.genre + " = ?");
+        updateQuery.append(", " + MovieColumnEnum.seen + " = ?");
+        updateQuery.append(", " + MovieColumnEnum.seen_date + " = ?");
+        updateQuery.append(", " + MovieColumnEnum.rat_total + " = ?");
+        updateQuery.append(", " + MovieColumnEnum.rat_director + " = ?");
+        updateQuery.append(", " + MovieColumnEnum.rat_actors + " = ?");
+        updateQuery.append(", " + MovieColumnEnum.rat_visual + " = ?");
+        updateQuery.append(", " + MovieColumnEnum.rat_story + " = ?");
         updateQuery.append(" WHERE " + MovieColumnEnum.movie_id + " = ?");
 
         ArrayList<Object> params = new ArrayList<Object>();
@@ -106,7 +131,8 @@ public class MovieJDBCTemplate implements MovieDAO {
         if(movie.getTitle() != null) params.add(movie.getTitle());
         if(movie.getGenre() != null) params.add(movie.getGenre());
         params.add(movie.isSeen());
-        if(movie.getSeenDate() != null) params.add(movie.getSeenDate());
+        if(!movie.getSeenDate().equals("")) params.add(movie.getSeenDate());
+        else if(movie.getSeenDate().equals("")) params.add(null);
         params.add(movie.getRatTotal());
         params.add(movie.getRatDirector());
         params.add(movie.getRatActors());

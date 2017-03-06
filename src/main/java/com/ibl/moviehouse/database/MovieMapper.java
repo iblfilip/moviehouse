@@ -15,7 +15,7 @@ public class MovieMapper implements RowMapper<Movie> {
         movie.setTitle(rs.getString(MovieColumnEnum.title.name()));
         movie.setGenre(rs.getString(MovieColumnEnum.genre.name()));
         movie.setSeen(rs.getBoolean(MovieColumnEnum.seen.name()));
-        movie.setSeenDate(rs.getDate(MovieColumnEnum.seen_date.name()));
+        movie.setSeenDate(rs.getString(MovieColumnEnum.seen_date.name()));
         movie.setRatTotal((Integer)rs.getObject(MovieColumnEnum.rat_total.name()));
         movie.setRatDirector((Integer)rs.getObject(MovieColumnEnum.rat_director.name()));
         movie.setRatVisual((Integer)rs.getObject(MovieColumnEnum.rat_visual.name()));

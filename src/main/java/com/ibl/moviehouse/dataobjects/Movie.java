@@ -4,7 +4,6 @@ import com.ibl.moviehouse.enums.MovieColumnEnum;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 public class Movie {
@@ -12,7 +11,7 @@ public class Movie {
     Integer userId;
     String title;
     String genre;
-    Date seenDate;
+    String seenDate;
     boolean seen;
     Integer ratTotal;
     Integer ratDirector;
@@ -32,7 +31,7 @@ public class Movie {
         else if(columnName.equals(MovieColumnEnum.genre.name()))
             setGenre(item.toString());
         else if(columnName.equals(MovieColumnEnum.seen_date.name()))
-            setSeenDate((Date)item);
+            setSeenDate(item.toString());
         else if(columnName.equals(MovieColumnEnum.seen.name())) {
             if (item.equals(1))
                 setSeen(true);
@@ -68,7 +67,7 @@ public class Movie {
         return title;
     }
 
-    public Date getSeenDate() {
+    public String getSeenDate() {
         return seenDate;
     }
 
@@ -113,7 +112,7 @@ public class Movie {
         this.genre = genre;
     }
 
-    public void setSeenDate(Date seenDate) {
+    public void setSeenDate(String seenDate) {
         this.seenDate = seenDate;
     }
 

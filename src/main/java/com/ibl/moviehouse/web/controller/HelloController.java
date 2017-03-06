@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,11 +31,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
-public class HelloController {
+public class HelloController extends WebMvcConfigurerAdapter{
 
 	private static final Logger logger = Logger.getLogger("Hello");
 	Processor processor = new Processor();
 	private int userId;
+
+	@Autowired
+	FormValidator formValidator;
 
 
 	/*@InitBinder
@@ -139,13 +143,17 @@ public class HelloController {
 	}*/
 
 	@RequestMapping(value = "/createrecord", method = RequestMethod.POST)
-	public String createRecord(@Valid @ModelAttribute("command") Movie movie, @RequestParam("control") String movieId,
-							   ModelMap model, HttpServletRequest request, BindingResult bindingResult) throws Exception {
-		/*logger.log(Level.INFO, "bind result "+bindingResult.hasErrors());
+	public String createRecord(@ModelAttribute("command") Movie movie, @RequestParam("control") String movieId,
+							   ModelMap model, Model modell, HttpServletRequest request, BindingResult bindingResult) throws Exception {
+		logger.log(Level.INFO, "bind result "+bindingResult.hasErrors());
+		logger.log(Level.INFO, "movie je "+movie.getTitle());
+		formValidator.validate(movie, bindingResult);
+
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("control", movieId);
 			referenceData(modell);
 			return "form";
-		}*/
+		}
 		logger.log(Level.INFO, "movie id je"+movieId);
 		logger.log(Level.INFO, "novy"+movie.getRatDirector());
 		logger.log(Level.INFO, "novy"+movie.getRatActors());

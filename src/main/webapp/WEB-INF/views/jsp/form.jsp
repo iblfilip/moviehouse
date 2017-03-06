@@ -124,7 +124,9 @@ Copyright 2016 Google Inc. All Rights Reserved.
       <div class="col-xs-4"></div>
         <div class="col-xs-4 center">
             <form:label path="title">Title:</form:label>
+            <spring:message code="NotEmpty.movie.title" />
             <form:input path="title" type="text" class="form-control" placeholder="${command.title}"/>
+            <form:errors path="title" cssClass="error" />
 
 
           </div>
@@ -135,7 +137,9 @@ Copyright 2016 Google Inc. All Rights Reserved.
                 <div class="col-xs-4"></div>
                   <div class="col-xs-4 center">
                     <label class="control-label">Genre:</label>
+                    <spring:message code="NotEmpty.movie.genre" />
                     <form:select path="genre" items="${genresList}" multiple="true" size="3" class="form-control"/>
+                    <form:errors path="genre" cssClass="error" />
                   </div>
             </div>
 
@@ -155,7 +159,9 @@ Copyright 2016 Google Inc. All Rights Reserved.
                 <div class="col-xs-4"></div>
                   <div class="col-xs-4 center">
                       <form:label path="seenDate">Date of seen:</form:label>
+                      <spring:message code="CorrectValue.movie.seenDate"/>
                       <form:input path="seenDate" type="text" class="form-control"/>
+                      <form:errors path="seenDate" cssClass="error" />
                     </div>
                     </div>
 
