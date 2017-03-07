@@ -2,11 +2,10 @@ package com.ibl.moviehouse.web.controller;
 
 import com.google.identitytoolkit.GitkitUser;
 import com.ibl.moviehouse.dataobjects.Movie;
-import com.ibl.moviehouse.processor.Processor;
+import com.ibl.moviehouse.service.ProcessorService;
 import com.ibl.moviehouse.tools.RatingCountTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,7 +19,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,12 +32,13 @@ import java.util.logging.Logger;
 public class HelloController extends WebMvcConfigurerAdapter{
 
 	private static final Logger logger = Logger.getLogger("Hello");
-	Processor processor = new Processor();
 	private int userId;
 
 	@Autowired
 	FormValidator formValidator;
 
+	@Autowired
+	ProcessorService processor;
 
 	/*@InitBinder
 	public void initBinder(final WebDataBinder binder){

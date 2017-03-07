@@ -1,37 +1,31 @@
-package com.ibl.moviehouse.processor;
+package com.ibl.moviehouse.service;
 
 import com.google.identitytoolkit.GitkitUser;
+import com.ibl.moviehouse.database.MovieDAO;
 import com.ibl.moviehouse.database.MovieJDBCTemplate;
 import com.ibl.moviehouse.dataobjects.*;
 import com.ibl.moviehouse.enums.*;
 import com.ibl.moviehouse.tools.DateTimeTool;
 import com.ibl.moviehouse.tools.GitKitTools;
 import com.ibl.moviehouse.tools.RatingCountTool;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Processor {
+@Service("processorService")
+public class ProcessorServiceImpl implements ProcessorService {
     public Logger logger = Logger.getLogger("ProcessorLogger");
 
     ApplicationContext context =
             new ClassPathXmlApplicationContext("Beans.xml");
 
     MovieJDBCTemplate movieJDBCTemplate = (MovieJDBCTemplate)context.getBean("movieJDBCTemplate");
-
-    /*public List selectMovie(Object value, MovieColumnEnum columnName) {
-        List movieList = null;
-        try {
-            movieList = moviesHandler.selectMovie(value, columnName.name());
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Exeption during execution of select statement ", e);
-        }
-        return movieList;
-    }*/
 
     public Movie selectMovieAccId(int movieId) {
         Movie movie = null;
