@@ -82,7 +82,6 @@ public class ProcessorServiceImpl implements ProcessorService {
         GitkitUser gitKitUser = gitKit.getGitKitUser(request);
 
         user = movieJDBCTemplate.selectUser(gitKitUser.getEmail());
-        logger.log(Level.INFO, "user mail ", gitKitUser.getEmail());
 
 
         if (user.getUserId().equals(null)== false)

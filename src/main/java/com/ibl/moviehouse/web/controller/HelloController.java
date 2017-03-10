@@ -105,7 +105,7 @@ public class HelloController extends WebMvcConfigurerAdapter{
 		}
 		//TODO oddelit useri kteri maji count vetsi nez 1, udelat jim jednodussi
 		else {
-			logger.log(Level.INFO, "User signed in, token is valid, info: " + gitkitUser.getEmail() + ", " + gitkitUser.getName() + ", " + gitkitUser.getHash());
+			logger.log(Level.INFO, "User signed in, token is valid, info: " + gitkitUser.getEmail() + ", " + gitkitUser.getName());
 
 			if (count >= 1) {
 				logger.log(Level.INFO, "User is on page, page visited more than once.");
@@ -145,7 +145,6 @@ public class HelloController extends WebMvcConfigurerAdapter{
 	public String createRecord(@ModelAttribute("command") Movie movie, @RequestParam("control") String movieId,
 							   ModelMap model, Model modell, HttpServletRequest request, BindingResult bindingResult) throws Exception {
 		logger.log(Level.INFO, "bind result "+bindingResult.hasErrors());
-		logger.log(Level.INFO, "movie je "+movie.getTitle());
 		formValidator.validate(movie, bindingResult);
 
 		if(bindingResult.hasErrors()) {

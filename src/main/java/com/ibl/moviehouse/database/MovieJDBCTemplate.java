@@ -25,8 +25,6 @@ public class MovieJDBCTemplate implements MovieDAO {
     }
 
     public void insertMovie(Movie movie){
-        logger.log(Level.INFO, "Inserted movie "+ movie.getTitle());
-
         StringBuilder insertQuery = new StringBuilder();
         insertQuery.append("INSERT INTO " + TableNameEnum.movies + " (");
         insertQuery.append(MovieColumnEnum.user_id);
@@ -54,11 +52,13 @@ public class MovieJDBCTemplate implements MovieDAO {
         params.add(movie.getRatVisual());
         params.add(movie.getRatStory());
         int row = jdbcTemplate.update(insertQuery.toString(), params.toArray());
+
+        logger.log(Level.INFO, "Inserted movie "+ movie.toString());
     }
     public Movie selectMovie(Integer movieId){
         String sql = "SELECT * FROM " + TableNameEnum.movies.name() + " WHERE " + MovieColumnEnum.movie_id + "=?";
         Movie movie = jdbcTemplate.queryForObject(sql, new Object[]{movieId}, new MovieMapper());
-        logger.log(Level.INFO, "selected movie with id = "+ movie.getMovieId() + ", name = "+ movie.getTitle());
+        logger.log(Level.INFO, "selected " + movie.toString());
         return movie;
     }
 
@@ -86,21 +86,21 @@ public class MovieJDBCTemplate implements MovieDAO {
     public void insertUser(User user){
         String sql = "INSERT INTO " + TableNameEnum.users.name() + " (" + UsersColumnEnum.user_email.name() + "," + UsersColumnEnum.user_name.name() + "," + UsersColumnEnum.current_provider.name() + "," + UsersColumnEnum.user_photo_url.name() + "," + UsersColumnEnum.user_registration_date.name() + "," + UsersColumnEnum.user_last_sign_in.name() + "," + UsersColumnEnum.hash_code.name() + ") VALUES (?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, user.getEmail(), user.getName(), user.getCurrentProvider(), user.getUserPhotoUrl(), user.getRegistrationDate(), user.getLastSignIn(), user.getHashCode());
-        logger.log(Level.INFO, "Inserted user "+ user.getEmail());
+        logger.log(Level.INFO, "Inserted user "+ user.toString());
         return;
     }
 
     public User selectUser(Integer userId){
         String sql = "SELECT * FROM " + TableNameEnum.users.name() + " WHERE " + UsersColumnEnum.user_id.name() + "=?";
         User user = jdbcTemplate.queryForObject(sql, new Object[]{userId}, new UserMapper());
-        logger.log(Level.INFO, "selected user with id = "+ user.getUserId() + ", email = "+ user.getEmail());
+        logger.log(Level.INFO, "selected " + user.toString());
         return user;
     }
 
     public User selectUser(String email){
         String sql = "SELECT * FROM " + TableNameEnum.users.name() + " WHERE " + UsersColumnEnum.user_email.name() + "=?";
         User user = jdbcTemplate.queryForObject(sql, new Object[]{email}, new UserMapper());
-        logger.log(Level.INFO, "selected user with id = "+ user.getUserId() + ", email = "+ user.getEmail());
+        logger.log(Level.INFO, "selected "+ user.toString());
         return user;
     }
 
@@ -141,7 +141,7 @@ public class MovieJDBCTemplate implements MovieDAO {
         params.add(movie.getMovieId());
         int row = jdbcTemplate.update(updateQuery.toString(), params.toArray());
 
-
+        logger.log(Level.INFO, "updated " + movie.toString());
     }
 
 

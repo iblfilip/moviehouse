@@ -19,38 +19,6 @@ public class Movie {
     Integer ratStory;
     Integer ratVisual;
 
-
-
-    public void setItem(String columnName, Object item){
-        if(columnName.equals(MovieColumnEnum.movie_id.name()))
-            setMovieId((Integer) item);
-        else if(columnName.equals(MovieColumnEnum.user_id.name()))
-            setUserId((Integer) item);
-        else if(columnName.equals(MovieColumnEnum.title.name()))
-            setTitle(item.toString());
-        else if(columnName.equals(MovieColumnEnum.genre.name()))
-            setGenre(item.toString());
-        else if(columnName.equals(MovieColumnEnum.seen_date.name()))
-            setSeenDate(item.toString());
-        else if(columnName.equals(MovieColumnEnum.seen.name())) {
-            if (item.equals(1))
-                setSeen(true);
-            else if (item.equals(0))
-                setSeen(false);
-        }
-        else if(columnName.equals(MovieColumnEnum.rat_total.name()))
-            setRatTotal((Integer)item);
-        else if(columnName.equals(MovieColumnEnum.rat_director.name()))
-            setRatDirector((Integer)item);
-        else if(columnName.equals(MovieColumnEnum.rat_actors.name()))
-            setRatActors((Integer)item);
-        else if(columnName.equals(MovieColumnEnum.rat_story.name()))
-            setRatStory((Integer)item);
-        else if(columnName.equals(MovieColumnEnum.rat_visual.name()))
-            setRatVisual((Integer)item);
-    }
-
-
     public int getMovieId() {
         return movieId;
     }
@@ -138,5 +106,9 @@ public class Movie {
 
     public void setRatVisual(Integer ratVisual) {
         this.ratVisual = ratVisual;
+    }
+
+    public String toString() {
+        return "movie: movieId= " + movieId + ", title=" + title + ", genre=" + genre + ", seen=" + seen + ", seenDate=" + seenDate + ", total rating=" + ratTotal + ", rating director=" + ratDirector + ", rating actors=" + ratActors + ", rating visual=" + ratVisual + ", rating story=" + ratStory;
     }
 }

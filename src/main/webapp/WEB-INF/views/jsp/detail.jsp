@@ -70,10 +70,10 @@ Copyright 2016 Google Inc. All Rights Reserved.
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
                       <li>
-                          <a class="page-scroll" href="#about">About</a>
+                          <a class="page-scroll" href="/create">Add movie</a>
                       </li>
                       <li>
-                          <a class="page-scroll" href="/index">My database</a>
+                          <a class="page-scroll" href="/index">My list</a>
                       </li>
                       <li>
                       <div id="navbar" style="margin:auto;background-color:transparent;margin-top: 8px; margin-right: 5px;; margin-bottom: 3px"></div>

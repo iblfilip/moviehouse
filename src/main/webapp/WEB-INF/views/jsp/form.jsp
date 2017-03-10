@@ -87,10 +87,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
                       <li>
-                          <a class="page-scroll" href="#about">About</a>
-                      </li>
-                      <li>
-                          <a class="page-scroll" href="/index">My database</a>
+                          <a class="page-scroll" href="/index">My list</a>
                       </li>
                       <li>
                       <div id="navbar" style="margin:auto;background-color:transparent;margin-top: 8px; margin-right: 5px;; margin-bottom: 3px"></div>
@@ -106,17 +103,6 @@ Copyright 2016 Google Inc. All Rights Reserved.
 
       <section class="bg-soft" id="about">
                       <div class="container">
-
-                      	<c:choose>
-                      		<c:when test="${movie['new']}">
-                      			<h1>Add Movie</h1>
-                      		</c:when>
-                      		<c:otherwise>
-                      			<h1>Update Movie</h1>
-                      		</c:otherwise>
-                      	</c:choose>
-                      	<br />
-
       <form:form class="form-horizontal" method="POST" action="/createrecord">
 
 

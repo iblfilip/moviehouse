@@ -82,24 +82,8 @@ public class User {
         return lastSignIn;
     }
 
-
-    public void setItem(String columnName, Object item){
-        if(columnName.equals(UsersColumnEnum.user_id.name()))
-            setUserId((Integer)item);
-        else if(columnName.equals(UsersColumnEnum.user_email.name()))
-            setEmail(item.toString());
-        else if(columnName.equals(UsersColumnEnum.user_name.name()))
-            setName(item.toString());
-        else if(columnName.equals(UsersColumnEnum.current_provider.name()))
-            setCurrentProvider(item.toString());
-        else if(columnName.equals(UsersColumnEnum.user_photo_url.name()))
-            setUserPhotoUrl(item.toString());
-        else if(columnName.equals(UsersColumnEnum.user_registration_date.name()))
-            setRegistrationDate((Date) item);
-        else if(columnName.equals(UsersColumnEnum.user_last_sign_in.name()))
-            setLastSignIn((Timestamp) item);
-        else if(columnName.equals(UsersColumnEnum.hash_code.name()))
-            setHashCode((byte[]) item);
+    public String toString() {
+        return "user: userId= " + userId + ", email=" + email + ", name=" + name + ", hashCode=" + hashCode + ", currentProvider=" + currentProvider + ", userPhotoUrl=" + userPhotoUrl + ", registrationDate=" + registrationDate + ", lastSignIn=" + lastSignIn;
     }
 }
 
