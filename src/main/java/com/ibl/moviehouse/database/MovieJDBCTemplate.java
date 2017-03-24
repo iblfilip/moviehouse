@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class MovieJDBCTemplate implements MovieDAO {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
-    private Logger logger = Logger.getLogger("MovieJDBCTemplate");
+    private static final Logger logger = Logger.getLogger(JdbcTemplate.class.getName());
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;

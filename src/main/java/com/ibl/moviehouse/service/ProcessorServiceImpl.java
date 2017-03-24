@@ -97,7 +97,7 @@ public class ProcessorServiceImpl implements ProcessorService {
     }
 
     /**
-     * Checks if user from gitKitUser has record in database, if not, new record is made
+     * Checks if user from gitKitUser has record in database, if not, new record is made in database
      * @param gitkitUser
      * @return userId from database
      */

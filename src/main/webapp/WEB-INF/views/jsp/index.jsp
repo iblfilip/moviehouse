@@ -27,7 +27,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
         window.google.identitytoolkit.signInButton(
       '#navbar', // accepts any CSS selector
       {
-        widgetUrl: "http://localhost:8080/gitkit",
+        widgetUrl: "https://moviehouse-148209.appspot.com/gitkit",
         signOutUrl: "/",
         popupMode: true
       }
@@ -113,7 +113,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
      <c:forEach items="${movieList}" var="movie" varStatus="status">
         <tr>
          <td>
-         <form action="${pageContext.request.contextPath}/edit" method="post">
+         <form action="${pageContext.request.contextPath}/listbuttons" method="post">
             <button type="submit" name="detail" value="${status.index}" class="btn-link">${movie.title}</button></td>
          <td>${movie.genre}</td>
          <td>${movie.seen}</td>
@@ -125,12 +125,12 @@ Copyright 2016 Google Inc. All Rights Reserved.
          <td>${movie.ratVisual}</td>
          <td>${status.index}</td>
          <td>
-         <form action="${pageContext.request.contextPath}/edit" method="post">
+         <form action="${pageContext.request.contextPath}/listbuttons" method="post">
              <input type="image" src="media/icons/cancel.png" height="25" width="25" name="erase" value="${status.index}" />
          </td>
 
          <td>
-         <form action="${pageContext.request.contextPath}/edit" method="post">
+         <form action="${pageContext.request.contextPath}/listbuttons" method="post">
              <input type="image" src="media/icons/pencil.png" height="25" width="25" name="edit" value="${status.index}" />
 
          </td>

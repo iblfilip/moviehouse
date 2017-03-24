@@ -27,7 +27,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
       window.google.identitytoolkit.signInButton(
     '#navbar', // accepts any CSS selector
     {
-      widgetUrl: "http://localhost:8080/gitkit",
+      widgetUrl: "https://moviehouse-148209.appspot.com/gitkit",
       signOutUrl: "/",
       popupMode: true
     }

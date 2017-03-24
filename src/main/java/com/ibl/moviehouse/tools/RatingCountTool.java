@@ -5,9 +5,6 @@ import com.ibl.moviehouse.dataobjects.Movie;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by Filip on 27.02.2017.
- */
 public class RatingCountTool {
 
     private static final Logger logger = Logger.getLogger(RatingCountTool.class.getName());
