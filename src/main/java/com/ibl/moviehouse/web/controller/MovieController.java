@@ -86,7 +86,7 @@ public class MovieController extends WebMvcConfigurerAdapter{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			response.getWriter().print(e.toString() + "chyba");
+			response.getWriter().print(e.toString() + "error");
 		}
 	}
 
