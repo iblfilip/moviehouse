@@ -9,9 +9,6 @@ import com.ibl.moviehouse.enums.UsersColumnEnum;
 import javax.sql.DataSource;
 import java.util.List;
 
-/**
- * Created by Filip on 27.01.2017.
- */
 public interface MovieDAO {
 
     public void setDataSource(DataSource dataSource);

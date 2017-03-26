@@ -65,7 +65,7 @@ public class ProcessorServiceImpl implements ProcessorService {
      */
     public int insertUser(User user) {
         movieJDBCTemplate.insertUser(user);
-        user = movieJDBCTemplate.selectUser(user.getUserId());
+        user = movieJDBCTemplate.selectUser(user.getEmail());
         return user.getUserId();
     }
 
@@ -105,19 +105,18 @@ public class ProcessorServiceImpl implements ProcessorService {
         DateTimeTool tool = new DateTimeTool();
         User user = null;
         String email = null;
-        int userId;
         email = gitkitUser.getEmail();
         user = movieJDBCTemplate.selectUser(email);
 
 
-        if (user.getUserId().equals(null) == false) {
-            userId = user.getUserId();
+        if (user != null) {
             movieJDBCTemplate.updateUser(tool.getSqlCurrentTimestamp(), UsersColumnEnum.user_last_sign_in, user.getUserId());
             logger.log(Level.INFO, "Returning user, found in db");
-            return userId;
+            return user.getUserId();
 
         } else {
             logger.log(Level.INFO, "User didnt found in db, creating new record");
+            user = new User();
             user.setEmail(gitkitUser.getEmail());
             user.setName(gitkitUser.getName());
             user.setHashCode(gitkitUser.getHash());
@@ -125,8 +124,8 @@ public class ProcessorServiceImpl implements ProcessorService {
             user.setUserPhotoUrl(gitkitUser.getPhotoUrl());
             user.setRegistrationDate(tool.getSqlCurrentDate());
             user.setLastSignIn(tool.getSqlCurrentTimestamp());
-            userId = insertUser(user);
-            return userId;
+            user.setUserId(insertUser(user));
+            return user.getUserId();
         }
 
     }

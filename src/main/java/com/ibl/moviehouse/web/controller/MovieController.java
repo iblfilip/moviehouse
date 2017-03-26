@@ -57,8 +57,9 @@ public class MovieController extends WebMvcConfigurerAdapter{
 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String printWelcome() {
-
+	public String printWelcome(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
 		return "welcome";
 
 	}
@@ -109,26 +110,26 @@ public class MovieController extends WebMvcConfigurerAdapter{
 
 		GitkitUser gitkitUser = processor.getGitKitUser(request);
 		if (gitkitUser == null) {
-			logger.log(Level.INFO, "User is not signed in, redirected to welcome servlet");
-			return new ModelAndView("welcome");
+			logger.log(Level.INFO, "User is not signed in, redirected to welcome page..");
+			return new ModelAndView("redirect:/");
 		}
-		//TODO oddelit useri kteri maji count vetsi nez 1, udelat jim jednodussi
 		else {
-			logger.log(Level.INFO, "User signed in, info: " + gitkitUser.getEmail() + ", " + gitkitUser.getName());
+			logger.log(Level.INFO, "User signed in, info: " + gitkitUser.getName());
 
 			if (count <= 1) {
-				logger.log(Level.INFO, "User is on index page, page visited first time.");
+				logger.log(Level.INFO, "User is first time on index page.");
 				userId = processor.doUserLogic(gitkitUser);
 				session.setAttribute("userId", userId);
 			} else if (count > 1)
-				logger.log(Level.INFO, "User is on index page, page visited " + count + " times.");
+				logger.log(Level.INFO, "User is on index page, page visited " + count + " times. User id" + session.getAttribute("userId"));
 
 			List<Movie> movieList = processor.selectAllMovies((Integer) session.getAttribute("userId"));
 			ModelAndView modelAndView = new ModelAndView("index");
 			modelAndView.addObject("movieList", movieList);
 			modelAndView.addObject("userId", session.getAttribute("userId"));
 			return modelAndView;
-	}}
+		}
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Model model) throws Exception {
@@ -164,10 +165,7 @@ public class MovieController extends WebMvcConfigurerAdapter{
 			movie = ratingCountTool.updateTotalRating(movie);
 			processor.updateMovieDynamically(movie);
 		}
-
-
 		return "redirect:/index";
-
 	}
 
 	/**
@@ -218,11 +216,13 @@ public class MovieController extends WebMvcConfigurerAdapter{
 			return new ModelAndView("form");
 	}
 
+	// TODO implement signout url in gitkit, when it start working
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public ModelAndView signOut (HttpServletRequest request) {
+	public String signOut (HttpServletRequest request) {
+		logger.log(Level.INFO, "sign out, invalidationg of sessions");
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return new ModelAndView("welcome");
+		return "redirect:/";
 	}
 
 	/**

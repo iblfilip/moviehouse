@@ -2,6 +2,7 @@ package com.ibl.moviehouse.database;
 
 import com.ibl.moviehouse.dataobjects.*;
 import com.ibl.moviehouse.enums.*;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -10,9 +11,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by Filip on 27.01.2017.
- */
 public class MovieJDBCTemplate implements MovieDAO {
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -98,8 +96,13 @@ public class MovieJDBCTemplate implements MovieDAO {
     }
 
     public User selectUser(String email){
+        User user = null;
         String sql = "SELECT * FROM " + TableNameEnum.users.name() + " WHERE " + UsersColumnEnum.user_email.name() + "=?";
-        User user = jdbcTemplate.queryForObject(sql, new Object[]{email}, new UserMapper());
+        try {
+            user = jdbcTemplate.queryForObject(sql, new Object[]{email}, new UserMapper());
+        }catch (EmptyResultDataAccessException e) {
+                return null;
+        }
         logger.log(Level.INFO, "selected "+ user.toString());
         return user;
     }
