@@ -1,13 +1,8 @@
 package com.ibl.moviehouse.dataobjects;
 
-import com.ibl.moviehouse.enums.UsersColumnEnum;
-
 import java.sql.Date;
 import java.sql.Timestamp;
 
-/**
- * Created by Filip on 25.10.2016.
- */
 public class User {
     Integer userId;
     String email;

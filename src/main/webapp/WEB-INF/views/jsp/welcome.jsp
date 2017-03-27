@@ -99,7 +99,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
               <div class="header-content-inner">
                   <h1 id="homeHeading">All your movies in one place</h1>
                   <hr>
-                  <p>On this small web application you can safe all good movies you have ever seen. No more forgetting and thinking about movies you have seen.</p>
+                  <p>Try MovieHouse and keep the names and rating of all movies, you have ever seen. It will never happen again, that you forget what you saw last night.</p>
                   <button class="btn btn-primary btn-xl page-scroll" onclick="window.google.identitytoolkit.signIn()">Sign in</button>
               </div>
           </div>
@@ -111,8 +111,8 @@ Copyright 2016 Google Inc. All Rights Reserved.
                   <div class="col-lg-8 col-lg-offset-2 text-center">
                       <h2 class="section-heading">This is what you need!</h2>
                       <hr class="light">
-                      <p class="text-faded">Hi, I have build this application with Java and Spring MVC.</p>
-                      <button class="btn btn-primary btn-xl page-scroll" onclick="window.google.identitytoolkit.signIn()">Sign in</button>
+                      <p class="text-faded">Dear all, my name is Filip Ibl, welcome to this small web application I have build to show you how I work. I have build this web application with Java and Spring MVC framework. Application is running on Google App Engine, moreover Google Identity Toolkit is used to prove identification of users. Datas are saved to MySQL database on Google Cloud Platform. The application is not in a final state, new functionality should be implemented. I was pressed on time so I hope that I will do it in future.</p>
+                      <p class="text-faded">Check source code on <a href="https://github.com/iblfilip/moviehouse" target="_blank">GitHub</a> or see my <a href="https://www.linkedin.com/in/filip-ibl-a9402365/" target="_blank">LinkedIn</a>.</p>
                   </div>
               </div>
           </div>

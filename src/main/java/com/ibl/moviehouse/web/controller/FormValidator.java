@@ -53,7 +53,6 @@ public class FormValidator implements Validator {
                     }
                 }
             }
-
         } catch (ParseException ex) {
             ex.printStackTrace();
             errors.rejectValue("seenDate", "error.seenDate");

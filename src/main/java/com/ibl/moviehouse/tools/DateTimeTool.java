@@ -1,12 +1,12 @@
 package com.ibl.moviehouse.tools;
 
+import org.springframework.stereotype.Service;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-/**
- * Created by Filip on 15.11.2016.
- */
+@Service
 public class DateTimeTool {
 
     public Date parseToSqlDate(String date) {
@@ -16,7 +16,7 @@ public class DateTimeTool {
             java.util.Date utilDate = sdf.parse(date);
             sqlDate = new Date(utilDate.getTime());
         } catch (ParseException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
         return sqlDate;
     }

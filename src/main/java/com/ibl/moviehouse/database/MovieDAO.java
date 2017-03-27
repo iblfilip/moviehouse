@@ -11,26 +11,26 @@ import java.util.List;
 
 public interface MovieDAO {
 
-    public void setDataSource(DataSource dataSource);
+    void setDataSource(DataSource dataSource);
 
-    public void insertMovie(Movie movie);
+    void insertMovie(Movie movie);
 
-    public Movie selectMovie(Integer movieId);
+    Movie selectMovie(Integer movieId);
 
-    public List<Movie> selectAllMovies(Integer userId);
+    List<Movie> selectAllMovies(Integer userId);
 
-    public void deleteMovie(Integer movieId);
+    void deleteMovie(Integer movieId);
 
-    public void updateMovie(Object updated, MovieColumnEnum column, Integer movieId);
+    void updateMovie(Object updated, MovieColumnEnum column, Integer movieId);
 
-    public void insertUser(User user);
+    void insertUser(User user);
 
-    public User selectUser(Integer userId);
+    User selectUser(Integer userId);
 
-    public User selectUser(String email);
+    User selectUser(String email);
 
-    public void updateUser(Object updated, UsersColumnEnum column, Integer userId);
+    void updateUser(Object updated, UsersColumnEnum column, Integer userId);
 
-    public void updateMovieDynamically(Movie movie);
+    void updateMovieDynamically(Movie movie);
 
 }

@@ -1,11 +1,5 @@
 package com.ibl.moviehouse.dataobjects;
 
-import com.ibl.moviehouse.enums.MovieColumnEnum;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.sql.Date;
-
 public class Movie {
     Integer movieId;
     Integer userId;

@@ -1,7 +1,6 @@
 package com.ibl.moviehouse.service;
 
 import com.google.identitytoolkit.GitkitUser;
-import com.ibl.moviehouse.database.MovieDAO;
 import com.ibl.moviehouse.database.MovieJDBCTemplate;
 import com.ibl.moviehouse.dataobjects.*;
 import com.ibl.moviehouse.enums.*;
@@ -20,12 +19,17 @@ import java.util.logging.Logger;
 
 @Service("processorService")
 public class ProcessorServiceImpl implements ProcessorService {
-    public Logger logger = Logger.getLogger("ProcessorLogger");
+    public Logger logger = Logger.getLogger(ProcessorServiceImpl.class.getName());
 
     ApplicationContext context =
             new ClassPathXmlApplicationContext("Beans.xml");
+    MovieJDBCTemplate movieJDBCTemplate = (MovieJDBCTemplate) context.getBean("movieJDBCTemplate");
 
-    MovieJDBCTemplate movieJDBCTemplate = (MovieJDBCTemplate)context.getBean("movieJDBCTemplate");
+    @Autowired
+    GitKitTools gitKit;
+
+    @Autowired
+    RatingCountTool ratingCountTool;
 
     public Movie selectMovieAccId(int movieId) {
         Movie movie = null;
@@ -35,7 +39,7 @@ public class ProcessorServiceImpl implements ProcessorService {
 
     public List selectAllMovies(int userId) {
         List<Movie> values = null;
-            values = movieJDBCTemplate.selectAllMovies(userId);
+        values = movieJDBCTemplate.selectAllMovies(userId);
         return values;
     }
 
@@ -44,11 +48,10 @@ public class ProcessorServiceImpl implements ProcessorService {
     }
 
     public void deleteMovie(int movieId) {
-            movieJDBCTemplate.deleteMovie(movieId);
+        movieJDBCTemplate.deleteMovie(movieId);
     }
 
     public void insertMovie(Movie movie) {
-        RatingCountTool ratingCountTool = new RatingCountTool();
         movie = ratingCountTool.updateTotalRating(movie);
         movieJDBCTemplate.insertMovie(movie);
 
@@ -60,6 +63,7 @@ public class ProcessorServiceImpl implements ProcessorService {
 
     /**
      * Make a record in database with object user a return what is userId of new record in db
+     *
      * @param user
      * @return userId
      */
@@ -70,34 +74,30 @@ public class ProcessorServiceImpl implements ProcessorService {
     }
 
 
-
-    public int getUserId(String email){
+    public int getUserId(String email) {
         User user = movieJDBCTemplate.selectUser(email);
         return user.getUserId();
     }
 
     public Integer getUserId(HttpServletRequest request) {
         User user = null;
-        GitKitTools gitKit = new GitKitTools();
         GitkitUser gitKitUser = gitKit.getGitKitUser(request);
-
         user = movieJDBCTemplate.selectUser(gitKitUser.getEmail());
 
-
-        if (user.getUserId().equals(null)== false)
+        if (user.getUserId().equals(null) == false)
             return (int) (long) user.getUserId();
         else return null;
 
     }
 
     public GitkitUser getGitKitUser(HttpServletRequest request) {
-        GitKitTools gitKit = new GitKitTools();
         GitkitUser gitKitUser = gitKit.getGitKitUser(request);
         return gitKitUser;
     }
 
     /**
      * Checks if user from gitKitUser has record in database, if not, new record is made in database
+     *
      * @param gitkitUser
      * @return userId from database
      */
@@ -107,7 +107,6 @@ public class ProcessorServiceImpl implements ProcessorService {
         String email = null;
         email = gitkitUser.getEmail();
         user = movieJDBCTemplate.selectUser(email);
-
 
         if (user != null) {
             movieJDBCTemplate.updateUser(tool.getSqlCurrentTimestamp(), UsersColumnEnum.user_last_sign_in, user.getUserId());
@@ -127,7 +126,6 @@ public class ProcessorServiceImpl implements ProcessorService {
             user.setUserId(insertUser(user));
             return user.getUserId();
         }
-
     }
 }
 
