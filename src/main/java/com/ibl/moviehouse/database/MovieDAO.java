@@ -23,14 +23,6 @@ public interface MovieDAO {
 
     void updateMovie(Object updated, MovieColumnEnum column, Integer movieId);
 
-    void insertUser(User user);
-
-    User selectUser(Integer userId);
-
-    User selectUser(String email);
-
-    void updateUser(Object updated, UsersColumnEnum column, Integer userId);
-
     void updateMovieDynamically(Movie movie);
 
 }

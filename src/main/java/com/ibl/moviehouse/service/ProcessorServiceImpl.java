@@ -2,6 +2,7 @@ package com.ibl.moviehouse.service;
 
 import com.google.identitytoolkit.GitkitUser;
 import com.ibl.moviehouse.database.MovieJDBCTemplate;
+import com.ibl.moviehouse.database.UserJDBCTemplate;
 import com.ibl.moviehouse.dataobjects.*;
 import com.ibl.moviehouse.enums.*;
 import com.ibl.moviehouse.tools.DateTimeTool;
@@ -24,6 +25,7 @@ public class ProcessorServiceImpl implements ProcessorService {
     ApplicationContext context =
             new ClassPathXmlApplicationContext("Beans.xml");
     MovieJDBCTemplate movieJDBCTemplate = (MovieJDBCTemplate) context.getBean("movieJDBCTemplate");
+    UserJDBCTemplate userJDBCTemplate = (UserJDBCTemplate) context.getBean("userJDBCTemplate");
 
     @Autowired
     GitKitTools gitKit;
@@ -68,21 +70,21 @@ public class ProcessorServiceImpl implements ProcessorService {
      * @return userId
      */
     public int insertUser(User user) {
-        movieJDBCTemplate.insertUser(user);
-        user = movieJDBCTemplate.selectUser(user.getEmail());
+        userJDBCTemplate.insertUser(user);
+        user = userJDBCTemplate.selectUser(user.getEmail());
         return user.getUserId();
     }
 
 
     public int getUserId(String email) {
-        User user = movieJDBCTemplate.selectUser(email);
+        User user = userJDBCTemplate.selectUser(email);
         return user.getUserId();
     }
 
     public Integer getUserId(HttpServletRequest request) {
         User user = null;
         GitkitUser gitKitUser = gitKit.getGitKitUser(request);
-        user = movieJDBCTemplate.selectUser(gitKitUser.getEmail());
+        user = userJDBCTemplate.selectUser(gitKitUser.getEmail());
 
         if (user.getUserId().equals(null) == false)
             return (int) (long) user.getUserId();
@@ -106,10 +108,10 @@ public class ProcessorServiceImpl implements ProcessorService {
         User user = null;
         String email = null;
         email = gitkitUser.getEmail();
-        user = movieJDBCTemplate.selectUser(email);
+        user = userJDBCTemplate.selectUser(email);
 
         if (user != null) {
-            movieJDBCTemplate.updateUser(tool.getSqlCurrentTimestamp(), UsersColumnEnum.user_last_sign_in, user.getUserId());
+            userJDBCTemplate.updateUser(tool.getSqlCurrentTimestamp(), UsersColumnEnum.user_last_sign_in, user.getUserId());
             logger.log(Level.INFO, "Returning user, found in db");
             return user.getUserId();
 
