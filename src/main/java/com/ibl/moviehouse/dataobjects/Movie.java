@@ -1,17 +1,17 @@
 package com.ibl.moviehouse.dataobjects;
 
 public class Movie {
-    Integer movieId;
-    Integer userId;
-    String title;
-    String genre;
-    String seenDate;
-    boolean seen;
-    Integer ratTotal;
-    Integer ratDirector;
-    Integer ratActors;
-    Integer ratStory;
-    Integer ratVisual;
+    private Integer movieId;
+    private Integer userId;
+    private String title;
+    private String genre;
+    private String seenDate;
+    private boolean seen;
+    private Integer ratTotal;
+    private Integer ratDirector;
+    private Integer ratActors;
+    private Integer ratStory;
+    private Integer ratVisual;
 
     public int getMovieId() {
         return movieId;

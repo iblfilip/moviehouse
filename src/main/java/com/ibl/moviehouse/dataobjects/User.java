@@ -4,14 +4,14 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class User {
-    Integer userId;
-    String email;
-    String name;
-    byte[] hashCode;
-    String currentProvider;
-    String userPhotoUrl;
-    Date registrationDate;
-    Timestamp lastSignIn;
+    private Integer userId;
+    private String email;
+    private String name;
+    private byte[] hashCode;
+    private String currentProvider;
+    private String userPhotoUrl;
+    private Date registrationDate;
+    private Timestamp lastSignIn;
 
     public void setUserId(Integer userId) {
         this.userId = userId;
